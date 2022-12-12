@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from ejemplo.models import Familiar, Mascota
 from ejemplo.forms import Buscar, FamiliarForm, MascotaForm
 from django.views import View 
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
 # Create your views here.
 
@@ -129,6 +129,11 @@ class FamiliarCrear(CreateView):
 class FamiliarBorrar(DeleteView):
   model = Familiar
   success_url = "/panel-familia"
+
+class FamiliarActualizar(UpdateView):
+  model = Familiar
+  success_url = "/panel-familia"
+  fields = ["nombre", "direccion", "numero_pasaporte"]
 
 
 

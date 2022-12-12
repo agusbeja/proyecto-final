@@ -19,6 +19,7 @@ from ejemplo.views import (index, saludar_a, sumar, monstrar_familiares,
                              buscar, BuscarFamiliar, AltaFamiliar,
                               ActualizarFamiliar, BorrarFamiliar, 
                               FamiliarList, FamiliarCrear, FamiliarBorrar,
+                              FamiliarActualizar,
                                mostrar_mascotas, BuscarMascota,)
 
 urlpatterns = [
@@ -35,7 +36,9 @@ urlpatterns = [
     path('panel-familia/', FamiliarList.as_view()),
     path('panel-familia/crear', FamiliarCrear.as_view()),
     path('panel-familia/<int:pk>/borrar', FamiliarBorrar.as_view()),
-    
+    path('panel-familia/<int:pk>/actualizar', FamiliarActualizar.as_view()),
+
+
     path('mis-mascotas/', mostrar_mascotas),
     path('mis-mascotas/buscar-mascotas', BuscarMascota.as_view()),
     
