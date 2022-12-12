@@ -1,0 +1,17 @@
+{% block titulo %}
+Buscar Mascotas
+{% endblock%}
+
+{% block contenido %}
+<form action="mis-mascotas/Buscar-mascotas" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit">
+</form>
+
+{% for mascota in lista_mascotas %}
+    <ul>
+        <li> Nombre: {{mascota.nombre}}, Tipo: {{mascota.tipo}}, Raza: {{mascota.raza}}, Edad: {{mascota.edad}}</li>
+    </ul>
+{% endfor %}
+{% endblock %}
