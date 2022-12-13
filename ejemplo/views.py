@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from ejemplo.models import Familiar, Mascota
-from ejemplo.forms import Buscar, FamiliarForm, MascotaForm
+from ejemplo.models import Familiar, Mascota, Auto
+from ejemplo.forms import Buscar, FamiliarForm, MascotaForm, BuscarCar, AutoForm
 from django.views import View 
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
@@ -118,6 +118,8 @@ class BorrarFamiliar(View):
       return render(request, self.template_name, {'lista_familiares': familiares})
 
 
+
+
 class FamiliarList(ListView):
   model = Familiar
 
@@ -141,16 +143,7 @@ class FamiliarActualizar(UpdateView):
 
 
 
-
-
-
-
-
-
-
-
-
-
+#MASCOTAS
 
 
 
@@ -175,3 +168,154 @@ class BuscarMascota(View):
             return render(request, self.template_name, {'form':form, 
                                                         'lista_mascotas': lista_mascotas})
         return render(request, self.template_name, {"form": form})
+
+
+class AltaMascota(View):
+
+    form_class = MascotaForm
+    template_name = 'ejemplo/alta_mascota.html'
+    initial = {"nombre":"", "tipo":"", "raza":"", "edad":""}
+
+    def get(self, request):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            msg_exito = f"se cargo con éxito la mascota {form.cleaned_data.get('nombre')}"
+            form = self.form_class(initial=self.initial)
+            return render(request, self.template_name, {'form':form, 
+                                                        'msg_exito': msg_exito})
+        
+        return render(request, self.template_name, {"form": form})
+
+
+class ActualizarMascota(View):
+  form_class = MascotaForm
+  template_name = 'ejemplo/actualizar_mascota.html'
+  initial = {"nombre":"", "tipo":"", "raza":"", "edad":""}
+  
+  def get(self, request, pk): 
+      mascota = get_object_or_404(Mascota, pk=pk)
+      form = self.form_class(instance=mascota)
+      return render(request, self.template_name, {'form':form,'mascota': mascota})
+
+  def post(self, request, pk): 
+      mascota = get_object_or_404(Mascota, pk=pk)
+      form = self.form_class(request.POST ,instance=mascota)
+      if form.is_valid():
+          form.save()
+          msg_exito = f"se actualizó con éxito el mascota {form.cleaned_data.get('nombre')}"
+          form = self.form_class(initial=self.initial)
+          return render(request, self.template_name, {'form':form, 
+                                                      'mascota': mascota,
+                                                      'msg_exito': msg_exito})
+      
+      return render(request, self.template_name, {"form": form})
+
+
+class BorrarMascota(View):
+  template_name = 'ejemplo/mascotas.html'
+  
+  def get(self, request, pk): 
+      mascota = get_object_or_404(Mascota, pk=pk)
+      mascota.delete()
+      mascota = Mascota.objects.all()
+      return render(request, self.template_name, {'lista_mascotas': mascota})
+
+
+
+
+
+
+
+#AUTOS
+
+
+
+def mostrar_autos(request):
+  lista_autos = Auto.objects.all()
+  return render(request, "ejemplo/autos.html", {"lista_autos": lista_autos})
+
+
+
+class BuscarAuto(View):
+    form_class = BuscarCar
+    template_name = 'ejemplo/buscar_auto.html'
+    initial = {"marca":""}
+    def get(self, request):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form':form})
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            marca = form.cleaned_data.get("marca")
+            lista_autos = Auto.objects.filter(marca__icontains=marca).all() 
+            form = self.form_class(initial=self.initial)
+            return render(request, self.template_name, {'form':form, 
+                                                        'lista_autos':lista_autos})
+        return render(request, self.template_name, {"form": form})
+
+
+
+class AltaAuto(View):
+
+    form_class = AutoForm
+    template_name = 'ejemplo/alta_auto.html'
+    initial = {"marca":"", "modelo":"", "año":"", "kilometros":""}
+
+    def get(self, request):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            msg_exito = f"se cargo con éxito el auto {form.cleaned_data.get('marca')}"
+            form = self.form_class(initial=self.initial)
+            return render(request, self.template_name, {'form':form, 
+                                                        'msg_exito': msg_exito})
+        
+        return render(request, self.template_name, {"form": form})
+
+
+
+class ActualizarAuto(View):
+  form_class = AutoForm
+  template_name = 'ejemplo/actualizar_auto.html'
+  initial = {"nombre":"", "direccion":"", "numero_pasaporte":""}
+  
+  
+  def get(self, request, pk): 
+      auto = get_object_or_404(Auto, pk=pk)
+      form = self.form_class(instance=auto)
+      return render(request, self.template_name, {'form':form,'auto': auto})
+
+
+  def post(self, request, pk): 
+      auto = get_object_or_404(Auto, pk=pk)
+      form = self.form_class(request.POST ,instance=auto)
+      if form.is_valid():
+          form.save()
+          msg_exito = f"se actualizó con éxito el auto {form.cleaned_data.get('marca')}"
+          form = self.form_class(initial=self.initial)
+          return render(request, self.template_name, {'form':form, 
+                                                      'auto': auto,
+                                                      'msg_exito': msg_exito})
+      
+      return render(request, self.template_name, {"form": form})
+
+
+
+
+class BorrarAuto(View):
+  template_name = 'ejemplo/autos.html'
+  
+  def get(self, request, pk): 
+      auto = get_object_or_404(Auto, pk=pk)
+      auto.delete()
+      autos = Auto.objects.all()
+      return render(request, self.template_name, {'lista_autos': autos})

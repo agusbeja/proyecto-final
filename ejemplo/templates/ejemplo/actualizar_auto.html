@@ -1,0 +1,15 @@
+{% block titulo%} Modificar un Auto {% endblock %}
+{% block contenido %}
+
+
+<form action="/mis-autos/actualizar/{{auto.id}}" method="post"> 
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+<h2 style="color:green">{{msg_exito}}</h2>
+
+<a href="/mis-autos">Volver a la lista de autos</a>
+
+{% endblock %}

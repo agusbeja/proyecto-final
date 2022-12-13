@@ -1,0 +1,14 @@
+{% block titulo%} Agregar nueva mascota {% endblock %}
+{% block contenido %}
+  
+  <form action="/mis-mascotas/alta" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+  </form>
+
+  <h2 style="color:green">{{msg_exito}}</h2>
+
+  <a href="/mis-mascotas">Volver a la lista de mascotas</a>
+
+{% endblock %}

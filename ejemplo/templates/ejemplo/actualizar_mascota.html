@@ -1,0 +1,14 @@
+{% block titulo%} Modificar una mascota {% endblock %}
+{% block contenido %}
+
+<form action="/mis-mascotas/actualizar/{{ mascota.id }}" method="post"> 
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+<h2 style="color:green">{{msg_exito}}</h2>
+
+<a href="/mis-mascotas">Volver a la lista de mascotas</a>
+
+{% endblock %}

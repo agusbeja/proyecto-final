@@ -9,12 +9,15 @@
 <body>
 
     <h1>Lista de mis mascotas</h1>
-
+    <a href="/mis-mascotas/alta">Nueva Mascota</a>
+    <ul>
     {% for mascota in lista_mascotas %}
-        <ul>
-            <li> Nombre: {{mascota.nombre}}, Tipo: {{mascota.tipo}}, Raza: {{mascota.raza}}, Edad: {{mascota.edad}} </li>
-        </ul>
+        
+            <li> id: {{mascota.id}}, Nombre: {{mascota.nombre}}, Tipo: {{mascota.tipo}}, Raza: {{mascota.raza}}, Edad: {{mascota.edad}} </li>
+                <a href='actualizar/{{ mascota.id }}'>Actualizar</a>
+                <a href ="/mis-mascotas/borrar/{{ mascota.id }}">Borrar</a>
+        
     {% endfor %}
-    
+    </ul>
 </body>
 </html>

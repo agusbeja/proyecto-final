@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Lista de mis autos</h1>
+    <a href="/mis-autos/alta">Nuevo auto</a>
+    <ul>
+    {% for auto in lista_autos %}
+        
+            <li> id: {{auto.id}}, Marca: {{auto.marca}}, Modelo: {{auto.modelo}}, Año: {{auto.ano}}, Kilometros: {{auto.kilometros}} </li>
+           
+            <a href='actualizar/{{auto.id}}'>Actualizar</a>
+            <a href ="/mis-autos/borrar/{{ auto.id }}">Borrar</a>
+    {% endfor %}
+    </ul>
+</body>
+</html>

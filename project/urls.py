@@ -20,7 +20,12 @@ from ejemplo.views import (index, saludar_a, sumar, monstrar_familiares,
                               ActualizarFamiliar, BorrarFamiliar, 
                               FamiliarList, FamiliarCrear, FamiliarBorrar,
                               FamiliarActualizar,
-                               mostrar_mascotas, BuscarMascota,)
+
+                               mostrar_mascotas, BuscarMascota, AltaMascota,
+                               ActualizarMascota, BorrarMascota,
+                               
+                               mostrar_autos, BuscarAuto, AltaAuto,
+                                ActualizarAuto, BorrarAuto)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,7 +44,17 @@ urlpatterns = [
     path('panel-familia/<int:pk>/actualizar', FamiliarActualizar.as_view()),
 
 
+
     path('mis-mascotas/', mostrar_mascotas),
     path('mis-mascotas/buscar-mascotas', BuscarMascota.as_view()),
+    path('mis-mascotas/alta', AltaMascota.as_view()),
+    path('mis-mascotas/actualizar/<int:pk>', ActualizarMascota.as_view()),
+    path('mis-mascotas/borrar/<int:pk>', BorrarMascota.as_view()),
     
+
+    path('mis-autos/', mostrar_autos),
+    path('mis-autos/buscar-auto', BuscarAuto.as_view()),
+    path('mis-autos/alta', AltaAuto.as_view()),
+    path('mis-autos/actualizar/<int:pk>', ActualizarAuto.as_view()),
+    path('mis-autos/borrar/<int:pk>', BorrarAuto.as_view()),
 ]
