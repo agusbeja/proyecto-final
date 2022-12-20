@@ -27,7 +27,8 @@ from ejemplo.views import (index, saludar_a, sumar, monstrar_familiares,
                                mostrar_autos, BuscarAuto, AltaAuto,
                                 ActualizarAuto, BorrarAuto)
                             
-from ejemplo_dos.views import index, PostDetalle, PostListar, PostCrear, PostBorrar, PostActualizar
+from ejemplo_dos.views import index, PostDetalle, PostListar, PostCrear, PostBorrar, PostActualizar, UserSignUp, UserLogin, UserLogout
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -66,5 +67,10 @@ urlpatterns = [
     path('ejemplo-dos/crear/', PostCrear.as_view(), name="ejemplo-dos-crear"),
     path('ejemplo-dos/<int:pk>/borrar/', PostBorrar.as_view(), name="ejemplo-dos-borrar"),
     path('ejemplo-dos/<int:pk>/actualizar/', PostActualizar.as_view(), name="ejemplo-dos-actualizar"),
+    path('ejemplo-dos/signup/', UserSignUp.as_view(), name="ejemplo-dos-signup"),
+    path('ejemplo-dos/login/', UserLogin.as_view(), name="ejemplo-dos-login"),
+    path('ejemplo-dos/logout/', UserLogout.as_view(), name="ejemplo-dos-logout"),
+
+
 ]
 
