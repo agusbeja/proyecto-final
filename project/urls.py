@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from ejemplo.views import (index, saludar_a, sumar, monstrar_familiares,
@@ -27,7 +29,9 @@ from ejemplo.views import (index, saludar_a, sumar, monstrar_familiares,
                                mostrar_autos, BuscarAuto, AltaAuto,
                                 ActualizarAuto, BorrarAuto)
                             
-from ejemplo_dos.views import index, PostDetalle, PostListar, PostCrear, PostBorrar, PostActualizar, UserSignUp, UserLogin, UserLogout
+from ejemplo_dos.views import (index, PostDetalle, PostListar, PostCrear,
+                                 PostBorrar, PostActualizar, UserSignUp,
+                                  UserLogin, UserLogout, AvatarActualizar, UserActualizar, MensajeCrear, MensajeListar, MensajeDetalle)
 
 
 urlpatterns = [
@@ -46,15 +50,12 @@ urlpatterns = [
     path('panel-familia/<int:pk>/borrar', FamiliarBorrar.as_view()),
     path('panel-familia/<int:pk>/actualizar', FamiliarActualizar.as_view()),
 
-
-
     path('mis-mascotas/', mostrar_mascotas),
     path('mis-mascotas/buscar-mascotas', BuscarMascota.as_view()),
     path('mis-mascotas/alta', AltaMascota.as_view()),
     path('mis-mascotas/actualizar/<int:pk>', ActualizarMascota.as_view()),
     path('mis-mascotas/borrar/<int:pk>', BorrarMascota.as_view()),
     
-
     path('mis-autos/', mostrar_autos),
     path('mis-autos/buscar-auto', BuscarAuto.as_view()),
     path('mis-autos/alta', AltaAuto.as_view()),
@@ -70,7 +71,13 @@ urlpatterns = [
     path('ejemplo-dos/signup/', UserSignUp.as_view(), name="ejemplo-dos-signup"),
     path('ejemplo-dos/login/', UserLogin.as_view(), name="ejemplo-dos-login"),
     path('ejemplo-dos/logout/', UserLogout.as_view(), name="ejemplo-dos-logout"),
-
-
+    path('ejemplo_dos/avatars/<int:pk>/actualizar/', AvatarActualizar.as_view(), name="ejemplo-dos-avatars-actualizar"),
+    path('ejemplo-dos/users/<int:pk>/actualizar/', UserActualizar.as_view(), name="ejemplo-dos-users-actualizar"),
+    path('ejemplo-dos/mensajes/crear/', MensajeCrear.as_view(), name="ejemplo-dos-mensajes-crear"),
+    path('ejemplo-dos/mensajes/<int:pk>/detalle/', MensajeDetalle.as_view(), name="ejemplo-dos-mensajes-detalle"),
+    path('ejemplo-dos/mensajes/listar/', MensajeListar.as_view(), name="ejemplo-dos-mensajes-listar"),
 ]
 
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
