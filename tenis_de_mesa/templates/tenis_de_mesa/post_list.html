@@ -1,0 +1,24 @@
+{% extends 'tenis_de_mesa/base.html' %}
+
+{% block contenido %}
+{% if user.is_authenticated %}
+    <a href="{% url 'tenis-de-mesa-crear' %}">Crear Post</a>
+    {% if user.avatar.imagen %}
+    <a href="{% url 'tenis-de-mesa-avatars-actualizar' user.avatar.id %}">Actualizar Avatar</a>
+    {% endif %}
+    <a href="{% url 'tenis-de-mesa-users-actualizar' user.id %}">Actualizar Profile</a>
+    <a href="{% url 'tenis-de-mesa-mensajes-listar' %}">Mensajes</a>
+{% endif %}
+<ul>
+{% for post in object_list %}
+    <li>
+        {{post.publicado_el}} - - {{post.titulo}}  
+        {% if user.is_superuser %}
+            <a href="{% url 'tenis-de-mesa-borrar' post.id %}">Borrar</a>
+            <a href="{% url 'tenis-de-mesa-actualizar' post.id %}">Actualizar</a>
+        {% endif %}
+        <a href="{% url 'tenis-de-mesa-detalle' post.id %}">Ver</a>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

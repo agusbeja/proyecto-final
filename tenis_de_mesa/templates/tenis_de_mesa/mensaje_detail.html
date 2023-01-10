@@ -1,0 +1,23 @@
+{% extends 'tenis_de_mesa/base.html' %}
+
+
+{% block contenido %}
+    <div>
+        De: {{object.nombre}}
+    </div>
+    <div>
+        Email contacto: {{object.email}}
+    </div>
+    <div>
+        <p>
+            Mensaje:
+            <br> 
+            {{object.texto}}
+        </p>
+    </div>
+    <div>
+        Enviado el: {{object.enviado_el}}
+    </div>
+    <br>
+    <a href="{% url 'tenis-de-mesa-mensajes-listar' %}">Lista de Mensajes</a>
+{% endblock %}

@@ -29,7 +29,7 @@ from ejemplo.views import (index, saludar_a, sumar, monstrar_familiares,
                                mostrar_autos, BuscarAuto, AltaAuto,
                                 ActualizarAuto, BorrarAuto)
                             
-from ejemplo_dos.views import (index, PostDetalle, PostListar, PostCrear,
+from tenis_de_mesa.views import (index, PostDetalle, PostListar, PostCrear,
                                  PostBorrar, PostActualizar, UserSignUp,
                                   UserLogin, UserLogout, AvatarActualizar, UserActualizar, MensajeCrear, MensajeListar, MensajeDetalle)
 
@@ -62,20 +62,20 @@ urlpatterns = [
     path('mis-autos/actualizar/<int:pk>', ActualizarAuto.as_view()),
     path('mis-autos/borrar/<int:pk>', BorrarAuto.as_view()),
 
-    path('ejemplo-dos/', index, name="ejemplo-dos-index"),
-    path('ejemplo-dos/<int:pk>/detalle/', PostDetalle.as_view(), name="ejemplo-dos-detalle"),
-    path('ejemplo-dos/listar/', PostListar.as_view(), name="ejemplo-dos-listar"),
-    path('ejemplo-dos/crear/', PostCrear.as_view(), name="ejemplo-dos-crear"),
-    path('ejemplo-dos/<int:pk>/borrar/', PostBorrar.as_view(), name="ejemplo-dos-borrar"),
-    path('ejemplo-dos/<int:pk>/actualizar/', PostActualizar.as_view(), name="ejemplo-dos-actualizar"),
-    path('ejemplo-dos/signup/', UserSignUp.as_view(), name="ejemplo-dos-signup"),
-    path('ejemplo-dos/login/', UserLogin.as_view(), name="ejemplo-dos-login"),
-    path('ejemplo-dos/logout/', UserLogout.as_view(), name="ejemplo-dos-logout"),
-    path('ejemplo-dos/avatars/<int:pk>/actualizar/', AvatarActualizar.as_view(), name="ejemplo-dos-avatars-actualizar"),
-    path('ejemplo-dos/users/<int:pk>/actualizar/', UserActualizar.as_view(), name="ejemplo-dos-users-actualizar"),
-    path('ejemplo-dos/mensajes/crear/', MensajeCrear.as_view(), name="ejemplo-dos-mensajes-crear"),
-    path('ejemplo-dos/mensajes/<int:pk>/detalle/', MensajeDetalle.as_view(), name="ejemplo-dos-mensajes-detalle"),
-    path('ejemplo-dos/mensajes/listar/', MensajeListar.as_view(), name="ejemplo-dos-mensajes-listar"),
+    path('tenis-de-mesa/', index, name="tenis-de-mesa-index"),
+    path('tenis-de-mesa/<int:pk>/detalle/', PostDetalle.as_view(), name="tenis-de-mesa-detalle"),
+    path('tenis-de-mesa/listar/', PostListar.as_view(), name="tenis-de-mesa-listar"),
+    path('tenis-de-mesa/crear/', PostCrear.as_view(), name="tenis-de-mesa-crear"),
+    path('tenis-de-mesa/<int:pk>/borrar/', PostBorrar.as_view(), name="tenis-de-mesa-borrar"),
+    path('tenis-de-mesa/<int:pk>/actualizar/', PostActualizar.as_view(), name="tenis-de-mesa-actualizar"),
+    path('tenis-de-mesa/signup/', UserSignUp.as_view(), name="tenis-de-mesa-signup"),
+    path('tenis-de-mesa/login/', UserLogin.as_view(), name="tenis-de-mesa-login"),
+    path('tenis-de-mesa/logout/', UserLogout.as_view(), name="tenis-de-mesa-logout"),
+    path('tenis-de-mesa/avatars/<int:pk>/actualizar/', AvatarActualizar.as_view(), name="tenis-de-mesa-avatars-actualizar"),
+    path('tenis-de-mesa/users/<int:pk>/actualizar/', UserActualizar.as_view(), name="tenis-de-mesa-users-actualizar"),
+    path('tenis-de-mesa/mensajes/crear/', MensajeCrear.as_view(), name="tenis-de-mesa-mensajes-crear"),
+    path('tenis-de-mesa/mensajes/<int:pk>/detalle/', MensajeDetalle.as_view(), name="tenis-de-mesa-mensajes-detalle"),
+    path('tenis-de-mesa/mensajes/listar/', MensajeListar.as_view(), name="tenis-de-mesa-mensajes-listar"),
 ]
 
 
